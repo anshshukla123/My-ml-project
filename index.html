@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML, CSS & JavaScript Assignment</title>
+  <style>
+    :root {
+      --navy: #172554; --blue: #2563eb; --sky: #eff6ff;
+      --ink: #1f2937; --muted: #64748b; --line: #dbeafe;
+      --white: #fff; --shadow: 0 12px 30px rgba(23,37,84,.09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fb; color: var(--ink); line-height: 1.6;
+    }
+    header {
+      color: white; padding: 42px 20px 30px; text-align: center;
+      background: linear-gradient(125deg, #172554, #2563eb);
+    }
+    header h1 { margin: 0 0 8px; font-size: clamp(26px, 4vw, 38px); }
+    header p { margin: 0; color: #dbeafe; }
+    nav {
+      position: sticky; top: 0; z-index: 10; display: flex;
+      justify-content: center; flex-wrap: wrap; gap: 6px;
+      padding: 10px; background: #fff; box-shadow: 0 3px 12px #0f172a12;
+    }
+    nav a {
+      color: var(--navy); text-decoration: none; font-weight: 700;
+      padding: 8px 13px; border-radius: 8px;
+    }
+    nav a:hover { color: white; background: var(--blue); }
+    main { width: min(1050px, 92%); margin: 28px auto 60px; }
+    .task {
+      background: white; margin: 22px 0; padding: 26px;
+      border: 1px solid #e5eaf3; border-radius: 16px; box-shadow: var(--shadow);
+      scroll-margin-top: 85px;
+    }
+    .task h2 { color: var(--navy); margin: 0 0 6px; font-size: 23px; }
+    .question { color: var(--muted); margin: 0 0 20px; }
+    .portfolio { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .avatar {
+      width: 112px; height: 112px; flex: 0 0 112px; border-radius: 50%;
+      display: grid; place-items: center; color: white; font-size: 34px;
+      font-weight: bold; background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border: 5px solid #dbeafe;
+    }
+    .portfolio h3 { margin: 0; font-size: 25px; color: var(--navy); }
+    .tag {
+      display: inline-block; margin: 4px 5px 4px 0; padding: 5px 11px;
+      color: #1d4ed8; background: var(--sky); border-radius: 20px; font-size: 13px;
+    }
+    .details { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 12px; margin-top: 20px; }
+    .detail { background: #f8fafc; border: 1px solid #e2e8f0; padding: 13px; border-radius: 10px; }
+    .detail strong { display: block; color: var(--navy); }
+    form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    label { font-weight: 700; font-size: 14px; }
+    input, select {
+      width: 100%; padding: 11px 12px; border: 1px solid #cbd5e1;
+      border-radius: 8px; font: inherit; background: white;
+    }
+    input:focus, select:focus { outline: 2px solid #93c5fd; border-color: var(--blue); }
+    .radio-row { display: flex; gap: 18px; flex-wrap: wrap; }
+    .radio-row label { font-weight: 400; }
+    .radio-row input { width: auto; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    button {
+      border: 0; border-radius: 8px; padding: 10px 17px; cursor: pointer;
+      color: white; background: var(--blue); font-weight: 700; font-size: 14px;
+    }
+    button:hover { filter: brightness(.9); }
+    button.secondary { color: #1e293b; background: #e2e8f0; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 480px; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { color: white; background: var(--navy); }
+    tbody tr:nth-child(even) { background: #f1f5f9; }
+    tbody tr:hover { background: #dbeafe; }
+    .demo-nav {
+      display: flex; flex-wrap: wrap; gap: 8px; padding: 12px;
+      background: var(--navy); border-radius: 10px;
+    }
+    .demo-nav a { color: white; padding: 8px 13px; text-decoration: none; border-radius: 6px; }
+    .demo-nav a:hover { background: #3b82f6; }
+    .profile-card {
+      width: min(310px,100%); padding: 24px; text-align: center;
+      border-radius: 15px; border: 1px solid #e2e8f0; box-shadow: 0 7px 20px #0f172a12;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .profile-card:hover { transform: translateY(-7px); box-shadow: 0 15px 28px #0f172a20; }
+    .profile-card .avatar { margin: 0 auto 12px; }
+    .profile-card h3 { margin: 5px 0 0; color: var(--navy); }
+    .profile-card p { color: var(--muted); }
+    .box-row { display: flex; flex-wrap: wrap; gap: 22px; }
+    .model-box {
+      width: 190px; height: 135px; padding: 18px; margin: 10px;
+      border: 5px solid #2563eb; background: #dbeafe; border-radius: 8px;
+    }
+    .model-box:nth-child(2) { padding: 28px; border-color: #7c3aed; background: #ede9fe; }
+    .model-box:nth-child(3) { padding: 12px; border: 8px dashed #0f766e; background: #ccfbf1; }
+    .calculator { max-width: 440px; display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .calculator .field { min-width: 0; }
+    .calculator .actions { grid-column: 1 / -1; }
+    #calcResult, #largestResult { font-weight: 700; color: #1d4ed8; margin: 14px 0 0; }
+    footer { text-align: center; padding: 22px; color: #64748b; }
+    @media (max-width: 600px) {
+      .task { padding: 19px; }
+      form { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      nav { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HTML, CSS & JavaScript Assignment</h1>
+    <p>Eight practical programs with responsive design and working JavaScript</p>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <a href="#portfolio">Portfolio</a><a href="#registration">Registration</a>
+    <a href="#table">Student Table</a><a href="#navbar">Navigation</a>
+    <a href="#profile">Profile Card</a><a href="#boxmodel">Box Model</a>
+    <a href="#largest">Largest Number</a><a href="#calculator">Calculator</a>
+  </nav>
+
+  <main>
+    <section class="task" id="portfolio">
+      <h2>1. Personal Portfolio Website</h2>
+      <p class="question">A personal webpage showing name, education, hobbies, skills and contact details.</p>
+      <div class="portfolio">
+        <div class="avatar" aria-label="Profile initials">AS</div>
+        <div>
+          <h3>Ansh Shukla</h3>
+          <p>Student | BCA, United University</p>
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Java</span><span class="tag">AI</span>
+        </div>
+      </div>
+      <div class="details">
+        <div class="detail"><strong>Education</strong>BCA – United University</div>
+        <div class="detail"><strong>Hobbies</strong>Cricket, Kabaddi and learning technology</div>
+        <div class="detail"><strong>Skills</strong>HTML, CSS, Java and basic programming</div>
+        <div class="detail"><strong>Contact</strong>Email: your-email@example.com<br>Phone: +91-XXXXXXXXXX</div>
+      </div>
+    </section>
+
+    <section class="task" id="registration">
+      <h2>2. Student Registration Form</h2>
+      <p class="question">The form includes all required fields, along with Submit and Reset buttons.</p>
+      <form id="registrationForm">
+        <div class="field"><label for="studentName">Name</label><input id="studentName" name="name" type="text" placeholder="Enter your full name" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="name@example.com" required></div>
+        <div class="field"><label for="password">Password</label><input id="password" name="password" type="password" minlength="6" placeholder="At least 6 characters" required></div>
+        <div class="field"><label for="dob">Date of Birth</label><input id="dob" name="dob" type="date" required></div>
+        <div class="field"><label>Gender</label><div class="radio-row">
+          <label><input type="radio" name="gender" value="Male" required> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Other"> Other</label>
+        </div></div>
+        <div class="field"><label for="course">Course Selection</label><select id="course" name="course" required>
+          <option value="">Choose a course</option><option>BCA</option><option>BBA</option><option>B.Com</option><option>MCA</option>
+        </select></div>
+        <div class="field full actions">
+          <button type="submit">Submit</button><button class="secondary" type="reset">Reset</button>
+        </div>
+      </form>
+      <p id="formMessage" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="task" id="table">
+      <h2>3. Student Details Table</h2>
+      <p class="question">An HTML table containing five student records.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Roll Number</th><th>Name</th><th>Course</th><th>Marks</th></tr></thead>
+        <tbody>
+          <tr><td>101</td><td>Rahul</td><td>BCA</td><td>86</td></tr>
+          <tr><td>102</td><td>Priya</td><td>BBA</td><td>91</td></tr>
+          <tr><td>103</td><td>Aman</td><td>BCA</td><td>78</td></tr>
+          <tr><td>104</td><td>Neha</td><td>B.Com</td><td>88</td></tr>
+          <tr><td>105</td><td>Arjun</td><td>BCA</td><td>82</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="task" id="navbar">
+      <h2>4. Responsive Navigation Bar</h2>
+      <p class="question">A navigation bar with Home, About, Services, Gallery and Contact links.</p>
+      <div class="demo-nav">
+        <a href="#portfolio">Home</a><a href="#portfolio">About</a><a href="#registration">Services</a>
+        <a href="#profile">Gallery</a><a href="#calculator">Contact</a>
+      </div>
+    </section>
+
+    <section class="task" id="profile">
+      <h2>5. Profile Card Design</h2>
+      <p class="question">A profile card with an image-style avatar, name, designation, description and button. Hover over the card.</p>
+      <article class="profile-card">
+        <div class="avatar">AS</div>
+        <h3>Ansh Shukla</h3>
+        <strong>Student & Web Development Learner</strong>
+        <p>I enjoy learning programming and creating simple, useful websites.</p>
+        <button type="button" onclick="showProfileMessage()">View Profile</button>
+        <p id="profileMessage" role="status" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <section class="task" id="boxmodel">
+      <h2>6. CSS Box Model</h2>
+      <p class="question">Three boxes demonstrate margin, padding, border, height, width and background color.</p>
+      <div class="box-row">
+        <div class="model-box">Box 1<br>Padding: 18px<br>Border: 5px solid</div>
+        <div class="model-box">Box 2<br>Padding: 28px<br>Purple border</div>
+        <div class="model-box">Box 3<br>Padding: 12px<br>Dashed border</div>
+      </div>
+      <p>All boxes use a fixed width and height. The space outside each box is the margin, while the space between its content and border is the padding.</p>
+    </section>
+
+    <section class="task" id="largest">
+      <h2>7. Largest Number Among Three Numbers</h2>
+      <p class="question">Enter three numbers. JavaScript conditional statements will find the largest.</p>
+      <div class="calculator">
+        <div class="field"><label for="num1">First number</label><input id="num1" type="number" step="any" placeholder="Enter first number"></div>
+        <div class="field"><label for="num2">Second number</label><input id="num2" type="number" step="any" placeholder="Enter second number"></div>
+        <div class="field"><label for="num3">Third number</label><input id="num3" type="number" step="any" placeholder="Enter third number"></div>
+        <div class="actions"><button type="button" onclick="findLargest()">Find Largest</button></div>
+      </div>
+      <p id="largestResult" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="task" id="calculator">
+      <h2>8. Simple Calculator</h2>
+      <p class="question">A calculator that performs addition, subtraction, multiplication and division.</p>
+      <div class="calculator">
+        <div class="field"><label for="calcA">First number</label><input id="calcA" type="number" step="any" placeholder="Enter first number"></div>
+        <div class="field"><label for="calcB">Second number</label><input id="calcB" type="number" step="any" placeholder="Enter second number"></div>
+        <div class="actions">
+          <button type="button" onclick="calculate('+')">Add (+)</button>
+          <button type="button" onclick="calculate('-')">Subtract (−)</button>
+          <button type="button" onclick="calculate('*')">Multiply (×)</button>
+          <button type="button" onclick="calculate('/')">Divide (÷)</button>
+        </div>
+      </div>
+      <p id="calcResult" role="status" aria-live="polite">Result will appear here.</p>
+    </section>
+  </main>
+  <footer>HTML, CSS & JavaScript Assignment · All 8 questions</footer>
+
+  <script>
+    // Question 2: Handle the registration form submission.
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      document.getElementById("formMessage").textContent =
+        "Registration form submitted successfully (demo).";
+    });
+
+    // Question 5: Display a message when the profile button is clicked.
+    function showProfileMessage() {
+      document.getElementById("profileMessage").textContent = "Thank you for viewing this profile!";
+    }
+
+    // Question 7: Find the largest of three numbers using if-else.
+    function findLargest() {
+      const fields = ["num1", "num2", "num3"].map(id => document.getElementById(id).value);
+      const result = document.getElementById("largestResult");
+      if (fields.some(value => value.trim() === "")) {
+        result.textContent = "Please enter all three numbers.";
+        return;
+      }
+      const [a, b, c] = fields.map(Number);
+      let largest;
+      if (a >= b && a >= c) {
+        largest = a;
+      } else if (b >= a && b >= c) {
+        largest = b;
+      } else {
+        largest = c;
+      }
+      result.textContent = "Largest number = " + largest;
+    }
+
+    // Question 8: Perform the selected calculator operation.
+    function calculate(operator) {
+      const first = document.getElementById("calcA").value;
+      const second = document.getElementById("calcB").value;
+      const output = document.getElementById("calcResult");
+      if (first.trim() === "" || second.trim() === "") {
+        output.textContent = "Please enter both numbers.";
+        return;
+      }
+      const a = Number(first), b = Number(second);
+      let answer;
+      if (operator === "+") answer = a + b;
+      else if (operator === "-") answer = a - b;
+      else if (operator === "*") answer = a * b;
+      else if (operator === "/") {
+        if (b === 0) {
+          output.textContent = "Cannot divide by zero.";
+          return;
+        }
+        answer = a / b;
+      }
+      output.textContent = "Result = " + answer;
+    }
+  </script>
+</body>
+</html>
